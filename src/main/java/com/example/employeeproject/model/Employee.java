@@ -41,6 +41,19 @@ public class Employee {
         this.startDate = employee.startDate;
     }
 
+
+
+
+
+
+    public int Employee(int id) {
+        return id;
+    }
+
+//    public Employee(int id, Employee employee) {
+//    }
+
+
     public int getId() {
         return id;
     }
@@ -95,5 +108,17 @@ public class Employee {
 
     public void setStartDate(String startDate) {
         this.startDate = startDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "fullName='" + fullName + '\'' +
+                ", profilePic='" + profilePic + '\'' +
+                ", salary='" + salary + '\'' +
+                ", email='" + email + '\'' +
+                ", mobileNumber='" + mobileNumber + '\'' +
+                ", startDate='" + startDate + '\'' +
+                '}';
     }
 }
