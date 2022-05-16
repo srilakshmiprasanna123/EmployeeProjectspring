@@ -1,46 +1,50 @@
 package com.example.employeeproject.controller;
 
+import com.example.employeeproject.dto.EmployeeDTO;
+import com.example.employeeproject.dto.ResponseDTO;
 import com.example.employeeproject.model.Employee;
 import com.example.employeeproject.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
 
 @RestController
+
+@RequestMapping("/employee")
 public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
-    @PostMapping("/emp")
-    public Employee sayPostHello(@RequestBody Employee employee){
-        Employee newEmployee = employeeService.addEmployee(employee);
-        return newEmployee;
-
+    @PostMapping("/post")
+    public ResponseEntity<ResponseDTO> createEmployees(@RequestBody EmployeeDTO employeeDTO) {
+        Employee employee1 = new Employee(employeeDTO);
+        ResponseDTO responseDTO = new ResponseDTO("Employee Created Successfully", employeeService.addEmployee(employee1));
+        return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
 
     @GetMapping("/get/{id}")
-    public Optional<Employee> sayHelloById(@PathVariable int id) {
-        Optional<Employee> response = employeeService.sayHelloById(id);
-        return response;
+    public ResponseEntity<ResponseDTO> getById(@PathVariable int id) {
+        ResponseDTO responseDTO = new ResponseDTO("Employee Get", employeeService.getById(id));
+        return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
 
-    @GetMapping("/Lucky")
-    public List<Employee> sayHelloAll() {
-        List<Employee> response = employeeService.sayHelloAll();
-        return response;
+    @GetMapping("/getall")
+    public ResponseEntity<ResponseDTO> allData() {
+        ResponseDTO responseDTO = new ResponseDTO("Getting all the record..", employeeService.allData());
+        return new ResponseEntity<>(responseDTO,HttpStatus.OK);
     }
 
     @PutMapping("/edit/{id}")
-    public Employee editData(@PathVariable int id, @RequestBody Employee user) {
-        Employee newUser = employeeService.editData(id, user);
-        return newUser;
+    public ResponseEntity<ResponseDTO> editData(@PathVariable int id, @RequestBody EmployeeDTO employeeDTO) {
+        ResponseDTO responseDTO = new ResponseDTO("edit", employeeService.editData(id, employeeDTO));
+        return new ResponseEntity<>(responseDTO,HttpStatus.OK);
     }
 
     @DeleteMapping("/remove/{id}")
-    public String removeById(@PathVariable int id) {
-        String response = employeeService.removeById(id);
-        return response;
+    public ResponseEntity<ResponseDTO> removeById(@PathVariable int id) {
+        ResponseDTO responseDTO = new ResponseDTO("delete", employeeService.removeById(id));
+        return new ResponseEntity<>(responseDTO,HttpStatus.OK);
     }
 }

@@ -1,5 +1,7 @@
 package com.example.employeeproject.model;
 
+import com.example.employeeproject.dto.EmployeeDTO;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -120,5 +122,24 @@ public class Employee {
                 ", mobileNumber='" + mobileNumber + '\'' +
                 ", startDate='" + startDate + '\'' +
                 '}';
+    }
+
+    public Employee(int id, EmployeeDTO employeeDTO) {
+        this.id = id;
+        this.fullName = employeeDTO.fullName;
+        this.profilePic = employeeDTO.profilePic;
+        this.mobileNumber = employeeDTO.mobileNumber;
+        this.email = employeeDTO.email;
+        this.salary = employeeDTO.salary;
+        this.startDate = employeeDTO.startDate;
+    }
+
+    public Employee(EmployeeDTO employeeDTO) {
+        this.fullName = employeeDTO.fullName;
+        this.profilePic = employeeDTO.profilePic;
+        this.mobileNumber = employeeDTO.mobileNumber;
+        this.email = employeeDTO.email;
+        this.salary = employeeDTO.salary;
+        this.startDate = employeeDTO.startDate;
     }
 }
