@@ -1,12 +1,16 @@
 package com.example.employeeproject.model;
 
 import com.example.employeeproject.dto.EmployeeDTO;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+@Data
 @Entity
+@RequiredArgsConstructor
 
 
 public class Employee {
@@ -30,8 +34,8 @@ public class Employee {
         this.startDate = startDate;
     }
 
-    public Employee() {
-    }
+//    public Employee() {
+//    }
 
     public Employee(Employee employee) {
         this.id = employee.id;
