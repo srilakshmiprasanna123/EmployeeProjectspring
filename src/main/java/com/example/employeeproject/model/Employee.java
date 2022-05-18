@@ -47,18 +47,10 @@ public class Employee {
         this.startDate = employee.startDate;
     }
 
+    public Employee(int id) {
+        this.id = id;
 
-
-
-
-
-    public int Employee(int id) {
-        return id;
     }
-
-//    public Employee(int id, Employee employee) {
-//    }
-
 
     public int getId() {
         return id;

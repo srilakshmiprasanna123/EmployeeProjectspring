@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 
 @RestController
 
@@ -18,7 +20,7 @@ public class EmployeeController {
     EmployeeService employeeService;
 
     @PostMapping("/post")
-    public ResponseEntity<ResponseDTO> createEmployees(@RequestBody EmployeeDTO employeeDTO) {
+    public ResponseEntity<ResponseDTO> createEmployees(@Valid @RequestBody EmployeeDTO employeeDTO) {
         Employee employee1 = new Employee(employeeDTO);
         ResponseDTO responseDTO = new ResponseDTO("Employee Created Successfully", employeeService.addEmployee(employee1));
         return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
@@ -37,7 +39,7 @@ public class EmployeeController {
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<ResponseDTO> editData(@PathVariable int id, @RequestBody EmployeeDTO employeeDTO) {
+    public ResponseEntity<ResponseDTO> editData(@Valid @PathVariable int id, @RequestBody EmployeeDTO employeeDTO) {
         ResponseDTO responseDTO = new ResponseDTO("edit", employeeService.editData(id, employeeDTO));
         return new ResponseEntity<>(responseDTO,HttpStatus.OK);
     }
