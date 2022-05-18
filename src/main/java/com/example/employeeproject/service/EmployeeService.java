@@ -1,6 +1,7 @@
 package com.example.employeeproject.service;
 
 import com.example.employeeproject.dto.EmployeeDTO;
+import com.example.employeeproject.exceptionhandler.EmployeeException;
 import com.example.employeeproject.model.Employee;
 
 import com.example.employeeproject.repository.IEmployeeRepository;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmployeeService {
+public class EmployeeService   {
 
     @Autowired
     IEmployeeRepository iEmployeeRepository;
@@ -21,10 +22,15 @@ public class EmployeeService {
          return newemployee;
     }
 
-    public Optional<Employee> getById(int id) {
-        return iEmployeeRepository.findById(id);
+    public Employee getById(int id) {
 
+        if (iEmployeeRepository.findById(id).isPresent()){
+            Employee employee = new Employee(id);
+            return employee;
+        }
+        else throw (new EmployeeException("Employee not Found"));
     }
+
 
     public List<Employee> allData() {
         return iEmployeeRepository.findAll();
@@ -38,7 +44,7 @@ public class EmployeeService {
             Employee alpha = iEmployeeRepository.save(employee1);
             return "This is the result"+ alpha;
         }
-        return "No Match";
+        else throw (new EmployeeException("id is not found"));
     }
 
 
@@ -48,6 +54,8 @@ public class EmployeeService {
             iEmployeeRepository.delete(newEmployee.get());
             return "Record is deleted with id " + id;
         }
-        return "Record not Found";
+        else throw (new EmployeeException("result not found"));
     }
+
+
 }

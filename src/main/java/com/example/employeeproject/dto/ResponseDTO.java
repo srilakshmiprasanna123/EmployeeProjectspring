@@ -11,7 +11,4 @@ import lombok.NoArgsConstructor;
 public class ResponseDTO {
     private String message;
     private Object data;
-
-
-
 }
