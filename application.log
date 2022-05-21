@@ -1722,3 +1722,4 @@ org.hibernate.QueryException: Space is not allowed after parameter prefix ':' [S
 2022-2022-05 11:41 [INFO][http-nio-8080-exec-1][o.a.c.c.C.[.[.[/]:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
 2022-2022-05 11:41 [INFO][http-nio-8080-exec-1][o.s.w.s.DispatcherServlet:525] Initializing Servlet 'dispatcherServlet'
 2022-2022-05 11:41 [INFO][http-nio-8080-exec-1][o.s.w.s.DispatcherServlet:547] Completed initialization in 1 ms
+2022-2022-05 12:19 [WARN][HikariPool-1 housekeeper][c.z.h.p.HikariPool:788] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=24m14s598ms848µs100ns).
