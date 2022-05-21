@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmployeeService   {
+public class EmployeeService implements IEmployeeInterface  {
 
     @Autowired
     IEmployeeRepository iEmployeeRepository;
@@ -22,22 +22,20 @@ public class EmployeeService   {
          return newemployee;
     }
 
-    public Employee getById(int id) {
-
-        if (iEmployeeRepository.findById(id).isPresent()){
-            Employee employee = new Employee(id);
-            return employee;
+    public Employee searchById(int id) {
+        return iEmployeeRepository.findById(id)
+                .orElseThrow(() -> new EmployeeException("Employee with EmployeeId " + id
+                        + " Doesn't Exists...!"));
         }
-        else throw (new EmployeeException("Employee not Found"));
-    }
 
 
-    public List<Employee> allData() {
+
+    public List<Employee> searchAll() {
         return iEmployeeRepository.findAll();
 
     }
 
-    public String editData(int id, EmployeeDTO employeeDTO) {
+    public String editById(int id, EmployeeDTO employeeDTO) {
 
         if (iEmployeeRepository.findById(id).isPresent()) {
             Employee employee1 = new Employee(id, employeeDTO);
@@ -57,5 +55,10 @@ public class EmployeeService   {
         else throw (new EmployeeException("result not found"));
     }
 
+    @Override
+    public List<Employee> getEmployeeByDepartment(String department) {
+        return iEmployeeRepository.findEmployeeByDepartment(department);
+    }
 
 }
+
